@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class Distillery {
     @Id
     @GeneratedValue
+    @Type(type="uuid-char")
     @Column(name = "uuid", nullable = false, unique = true)
     UUID id;
 
