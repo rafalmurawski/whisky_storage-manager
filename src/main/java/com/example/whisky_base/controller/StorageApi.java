@@ -15,7 +15,6 @@ import static lombok.AccessLevel.PRIVATE;
 
 @RestController
 @RequestMapping("/storage")
-@CrossOrigin(value = "http://localhost:4200/storage")
 public class StorageApi {
 
     StorageService storageService;
