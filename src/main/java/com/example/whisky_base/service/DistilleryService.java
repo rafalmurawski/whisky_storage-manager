@@ -1,5 +1,7 @@
 package com.example.whisky_base.service;
 
+import com.example.whisky_base.controller.DistilleryApi.DistilleryCommand;
+import com.example.whisky_base.model.RegionOfProduction;
 import com.example.whisky_base.model.entity.Distillery;
 import com.example.whisky_base.repo.DistilleryRepo;
 import lombok.AccessLevel;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,23 +23,32 @@ public class DistilleryService {
         this.distilleryRepo = distilleryRepo;
     }
 
-    public Distillery addDistillery(Distillery distillery) {
-        distillery.setName(distillery.getName().toUpperCase());
+    public Distillery addDistillery(DistilleryCommand distilleryCommand) {
+        Distillery distillery = new Distillery();
+        distillery.setName(distilleryCommand.getName().toUpperCase());
+        distillery.setRegionOfProduction(RegionOfProduction.valueOf(distilleryCommand.getRegionOfProduction().toUpperCase()));
         distilleryRepo.save(distillery);
         return distillery;
 
     }
 
-    public List<Distillery> showAll() {
-        return distilleryRepo.findAll();
+    public List<Distillery> showByRegionOfProduction(String regionOfProduction) {
+        return distilleryRepo.findAllByRegionOfProduction(RegionOfProduction.valueOf(regionOfProduction));
+
+
     }
 
-    public void deleteDistillery(String name) {
+
+    public Boolean deleteDistillery(String name) {
         System.out.println(name);
 
-        Distillery byName = distilleryRepo.findByName(name);
-        distilleryRepo.delete(byName);
+        Optional<Distillery> byName = distilleryRepo.findByName(name);
+        //wywalić getta
+        distilleryRepo.delete(byName.get());
 
 
+        return null;
     }
+
+
 }

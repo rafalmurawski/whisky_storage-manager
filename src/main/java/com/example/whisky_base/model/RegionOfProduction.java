@@ -1,5 +1,6 @@
 package com.example.whisky_base.model;
 
 public enum RegionOfProduction {
-    LOWLANDS, HIGHLANDS, SPEYSIDE, ISLAY, CAMPBELTOWN
+    LOWLAND, HIGHLAND, SPEYSIDE, ISLAY, CAMPBELTOWN, OTHER_ISLANDS
+
 }
