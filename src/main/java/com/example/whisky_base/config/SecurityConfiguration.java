@@ -44,11 +44,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET,"/whisky").authenticated()
                 .antMatchers(HttpMethod.POST,"/whisky").authenticated()
-                .antMatchers(HttpMethod.POST,"/whisky").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/whisky").authenticated()
 
                 .antMatchers(HttpMethod.GET,"/storage").authenticated()
                 .antMatchers(HttpMethod.POST,"/storage").authenticated()
-                .antMatchers(HttpMethod.POST,"/storage").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/storage").authenticated()
 
 
                 .anyRequest().permitAll()

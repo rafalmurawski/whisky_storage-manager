@@ -13,6 +13,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"whisky_uuid", "user_user_mail", "bottle_uuid" })})
 public class Storage {
 
     @Id

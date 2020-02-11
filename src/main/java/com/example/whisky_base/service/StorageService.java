@@ -1,6 +1,5 @@
 package com.example.whisky_base.service;
 
-import com.example.whisky_base.controller.WhiskyApi;
 import com.example.whisky_base.model.entity.*;
 import com.example.whisky_base.repo.*;
 import org.springframework.security.core.Authentication;
@@ -33,7 +32,6 @@ public class StorageService {
     }
 
 
-
     @Transactional
     public Storage addPosition(StorageCommand storageCommand) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -45,15 +43,25 @@ public class StorageService {
                 distillery.orElseThrow(() -> new UsernameNotFoundException("Whisky not found")));
         Optional<Bottle> bottle = bottleRepo.findByCapacity(storageCommand.getBottleCapacity());
 
+        Optional<Storage> whiskyInStorage = storageRepo.findByUserAndWhiskyAndBottle(user, whisky, bottle);
 
-        Storage storage = new Storage();
-        storage.setUser(user.orElseThrow(() -> new UsernameNotFoundException("User not found")));
-        storage.setWhisky(whisky.orElseThrow(() -> new UsernameNotFoundException("Whisky not found")));
-        storage.setBottle(bottle.orElseThrow(() -> new UsernameNotFoundException("Bottle not found")));
-        storage.setQuantityOfBottles(storageCommand.getQuantityOfBottles());
 
-        return storageRepo.save(storage);
+        if (!whiskyInStorage.isPresent()) {
 
+
+            Storage storage = new Storage();
+            storage.setUser(user.orElseThrow(() -> new UsernameNotFoundException("User not found")));
+            storage.setWhisky(whisky.orElseThrow(() -> new UsernameNotFoundException("Whisky not found")));
+            storage.setBottle(bottle.orElseThrow(() -> new UsernameNotFoundException("Bottle not found")));
+            storage.setQuantityOfBottles(storageCommand.getQuantityOfBottles());
+
+            return storageRepo.save(storage);
+        } else {
+
+            whiskyInStorage.get().setQuantityOfBottles(whiskyInStorage.get().getQuantityOfBottles() + storageCommand.getQuantityOfBottles());
+            return storageRepo.save(whiskyInStorage.get());
+
+        }
 
     }
 
