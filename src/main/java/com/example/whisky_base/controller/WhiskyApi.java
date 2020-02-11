@@ -16,6 +16,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 @RestController
 @RequestMapping("/whisky")
+@CrossOrigin(value = "http://localhost:4200/whisky")
 public class WhiskyApi {
 
     WhiskyService whiskyService;
