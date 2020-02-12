@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/storage").authenticated()
                 .antMatchers(HttpMethod.POST,"/storage").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/storage").authenticated()
-                .antMatchers(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, )
+                .antMatchers(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "")
 
 
                 .anyRequest().permitAll()
