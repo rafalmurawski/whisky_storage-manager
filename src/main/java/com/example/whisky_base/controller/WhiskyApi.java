@@ -19,7 +19,6 @@ import static lombok.AccessLevel.PRIVATE;
 public class WhiskyApi {
 
     WhiskyService whiskyService;
-    private String header = "Access-Control-Allow-Origin: *";
 
     @Autowired
     public WhiskyApi(WhiskyService whiskyService) {
