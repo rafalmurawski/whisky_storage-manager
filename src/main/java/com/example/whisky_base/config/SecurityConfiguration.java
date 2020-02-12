@@ -3,6 +3,7 @@ package com.example.whisky_base.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -53,6 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/storage").authenticated()
                 .antMatchers(HttpMethod.POST,"/storage").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/storage").authenticated()
+                .antMatchers(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, )
 
 
                 .anyRequest().permitAll()
