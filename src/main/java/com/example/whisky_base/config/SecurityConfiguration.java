@@ -40,8 +40,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "/**").permitAll()
+                
                 .antMatchers(HttpMethod.POST, "/user").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/user").hasRole("ADMIN")
+
 
                 .antMatchers(HttpMethod.GET, "/distillery").authenticated()
                 .antMatchers(HttpMethod.POST, "/distillery").hasRole("ADMIN")
@@ -54,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/storage").authenticated()
                 .antMatchers(HttpMethod.POST,"/storage").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/storage").authenticated()
-                .antMatchers(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "")
 
 
                 .anyRequest().permitAll()
